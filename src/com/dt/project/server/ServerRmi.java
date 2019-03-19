@@ -20,9 +20,6 @@ import java.sql.SQLException;
 
 public class ServerRmi extends UnicastRemoteObject implements InterfaceRMI {
 
-    int[] vetor = new int[10];
-    int[] vetor2 = new int[10];
-
     public ServerRmi() throws RemoteException {
         System.out.println("Novo Servidor Intanciado!");
     }
@@ -30,6 +27,8 @@ public class ServerRmi extends UnicastRemoteObject implements InterfaceRMI {
     @Override
     public String vetores(int[] vet) throws RemoteException {
         String ordenado = " ";
+        int[] vetor = new int[vet.length];
+        int[] vetor2 = new int[vet.length];
 
         for (int i = 0; i < vet.length; i++) {
             vetor[i] = vet[i];
@@ -78,8 +77,6 @@ public class ServerRmi extends UnicastRemoteObject implements InterfaceRMI {
     public void cadastrar_vetor(String Valor) {
         System.out.println(Valor);
         Connection con = new ConnectionFactory().getConnection();
-        System.out.println(con);
-        System.out.println("djgakdkagsdkagsdg");
         PreparedStatement stat = null;
 
         try {

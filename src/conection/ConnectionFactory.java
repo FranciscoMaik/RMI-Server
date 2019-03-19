@@ -32,7 +32,6 @@ public class ConnectionFactory {
     public static Connection getConnection(){
         try {
             Class.forName(DRIVER); //Classe do driver
-            System.out.println("isso");
             
             return DriverManager.getConnection(URL,USER,PASS);
             
