@@ -19,7 +19,7 @@ public class IniciaServer {
             System.out.println("Iniciando o servidor!");
             Registry registry = LocateRegistry.createRegistry(1010);
             //HelloImpl obj = new HelloImpl();
-            registry.bind("ServidorMat_1", new ServerRmi());
+            registry.bind("Lista", new ServerRmi());
             //Naming.rebind("ServidorMat_1", new ServerRmi());
         } catch (Exception e) {
             System.out.println("Ocorreu um erro na iniciação do servidor!\n"+e.toString());
