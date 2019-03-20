@@ -24,8 +24,8 @@ public class ServerRmi extends UnicastRemoteObject implements InterfaceRMI {
         System.out.println("Novo Servidor Intanciado!");
     }
 
-    @Override
-    public String vetores(int[] vet) throws RemoteException {
+    @Override    
+    public String vetores(int[] vet, String mac) throws RemoteException {
         String ordenado = " ";
         int[] vetor = new int[vet.length];
         int[] vetor2 = new int[vet.length];
@@ -39,7 +39,7 @@ public class ServerRmi extends UnicastRemoteObject implements InterfaceRMI {
             ordenado += " " + vetor2[i];
         }
 
-        cadastrar_vetor(ordenado);
+        cadastrar_vetor(ordenado,mac);
 
         return ordenado;
     }
@@ -74,14 +74,15 @@ public class ServerRmi extends UnicastRemoteObject implements InterfaceRMI {
         return f;
     }
 
-    public void cadastrar_vetor(String Valor) {
+    public void cadastrar_vetor(String Valor, String mac) {
         System.out.println(Valor);
         Connection con = new ConnectionFactory().getConnection();
         PreparedStatement stat = null;
 
         try {
-            stat = con.prepareStatement("INSERT INTO listas(numeros)VALUES(?);");
+            stat = con.prepareStatement("INSERT INTO listas(numeros,id_cliente)VALUES(?,?);");
             stat.setString(1, Valor);
+            stat.setString(2,mac);
             stat.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Deu erro " + e);
@@ -90,4 +91,5 @@ public class ServerRmi extends UnicastRemoteObject implements InterfaceRMI {
         }
     }
 
+  
 }
